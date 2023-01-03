@@ -2,20 +2,20 @@ import React from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Inertia } from "@inertiajs/inertia";
 import { Head, InertiaLink, useForm, usePage } from "@inertiajs/inertia-react";
+import { useParams } from "react-router-dom";
 
 const OrderPreview = (props) => {
 
-    const { movie_schedule } = usePage().props;
-    console.log(movie_schedule);
+    const { movie_schedule, movie, studio, seat_capacity, auth } = usePage().props;
     const { data, setData, errors, post } = useForm({
-        movie_schedule_id: "",
+        movie_schedule_id: movie_schedule.id,
         qty: "",
-        user_id: "{ auth.user.id }",
+        user_id: auth.user.id,
     });
 
     function handleSubmit(e) {
         e.preventDefault();
-        post(route("movieSchedule.store"));
+        post(route("order.checkout"));
     }
 
     return (
@@ -36,11 +36,42 @@ const OrderPreview = (props) => {
                             </div>
 
                             <div className="overflow-x-auto bg-white rounded shadow">
+                                <ul>
+                                    <li><b>Movie ID</b> : {movie.id}</li>
+                                    <li><b>Title</b> : {movie.title}</li>
+                                    <li><b>Overview</b> : {movie.overview}</li>
+                                    <li><b>Schedules</b> :
+                                        <table className="w-full whitespace-nowrap">
+                                            <thead className="text-white bg-gray-600">
+                                                <tr className="font-bold text-left">
+                                                    <th className="" style={{ width:"auto" }}>Price</th>
+                                                    <th className="" style={{ width:"15%" }}>Start Time</th>
+                                                    <th className="" style={{ width:"15%" }}>End Time</th>
+                                                    <th className="" style={{ width:"auto" }}>Date</th>
+                                                    <th className="" style={{ width:"auto" }}>Studio Number</th>
+                                                    <th className="" style={{ width:"auto" }}>Seat Remaining</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{movie_schedule.price}</td>
+                                                    <td>{movie_schedule.start_time}</td>
+                                                    <td>{movie_schedule.end_time}</td>
+                                                    <td>{movie_schedule.date}</td>
+                                                    <td>{studio.studio_number}</td>
+                                                    <td>{seat_capacity}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table> 
+                                    </li>
+                                </ul>
 
-                            </div>
+                                
+                            </div><br/>
 
                             <form name="createForm" onSubmit={handleSubmit}>
                                 <div className="flex flex-col">
+                                    {/* <input type="text" label="movie_id" name="movie_schedule_id" value={movie_schedule.id} onChange={(e) => setData("movie_schedule_id", e.target.value)} /> */}
                                     <div className="mb-4">
                                         <label>Qty</label>
                                         <input 

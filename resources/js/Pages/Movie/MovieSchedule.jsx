@@ -2,7 +2,6 @@ import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { Head, InertiaLink, useForm, usePage, Link } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Dropdown } from "bootstrap";
 
 const MovieSchedule = (props) => {
 
@@ -12,14 +11,6 @@ const MovieSchedule = (props) => {
         if (confirm("Are you sure you want to delete this schedule?")) {
             Inertia.delete(route("movieSchedule.destroy", id));
         }
-    }
-
-    const goPreview = async (id) => {
-        Inertia.post("/order/preview", {
-            id: id,
-            tes: "tes tio pintar",
-
-        });
     }
     
     return (
@@ -92,7 +83,7 @@ const MovieSchedule = (props) => {
                                                     <td className="">{schedules.seat_remaining}</td>
                                                     <td>
                                                         <button type="button" className="px-2 font-bold text-white bg-red-500 sm rounded" onClick={() => destroy(schedules.id)}>Delete</button>&nbsp;
-                                                        <button type="button" className="px-2 font-bold text-white bg-blue-500 sm rounded" onClick={() => goPreview(schedules.id)}>Pick</button>
+                                                        <InertiaLink href={route("order.preview", schedules.id)} target="_blank" className="px-2 font-bold text-white bg-blue-500 sm rounded" >Pick id:{schedules.id}</InertiaLink>
 
                                                     </td>
                                                 </tr>

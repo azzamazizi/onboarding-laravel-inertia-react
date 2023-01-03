@@ -8,7 +8,6 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StudioController;
-use App\Http\Controllers\MovieScheduleController;
 use App\Http\Controllers\BackOfficeController;
 
 /*
@@ -50,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/backoffice/movieSchedule/{movieSchedule}', [BackOfficeController::class, 'destroyMovieSchedule'])->name('movieSchedule.destroy');
 
     Route::get('/order', [OrderController::class, 'orderList'])->name('order.list');
-    Route::post('/order/preview', [OrderController::class, 'orderPreview'])->name('order.preview');
+    Route::get('/order/preview/{id}', [OrderController::class, 'orderPreview'])->name('order.preview');
     Route::post('/order/checkout', [OrderController::class, 'orderCheckout'])->name('order.checkout');
     
 });
