@@ -83,7 +83,7 @@ const MovieSchedule = (props) => {
                                                     <td className="">{schedules.seat_remaining}</td>
                                                     <td>
                                                         <button type="button" className="px-2 font-bold text-white bg-red-500 sm rounded" onClick={() => destroy(schedules.id)}>Delete</button>&nbsp;
-                                                        <InertiaLink href={route("order.preview", schedules.id)} target="_blank" className="px-2 font-bold text-white bg-blue-500 sm rounded" >Pick id:{schedules.id}</InertiaLink>
+                                                        <InertiaLink href={route("order.preview", schedules.id)} target="_blank" className="px-2 font-bold text-white bg-blue-500 sm rounded" >Pick</InertiaLink>
 
                                                     </td>
                                                 </tr>

@@ -27,9 +27,6 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('studio.index')} active={route().current('studio.index')}>
                                     Studio
                                 </NavLink>
-                                <NavLink href={route('order.list')} active={route().current('order.list')}>
-                                    Order
-                                </NavLink>
                             </div>
                             
                             <div className="hidden sm:flex sm:items-center sm:ml-6">
